@@ -1,0 +1,135 @@
+import  { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { Product } from '../fetch-data/fetch-data';
+import client from "../../../sanity-ecommerce/sanityClient"
+import {urlFor} from '../../../sanity-ecommerce/lib/image'
+import renderStars from '../stars/stars';
+import "./product-detail.css"
+
+const ProductDetail = () => {
+  const params = useParams();
+  const id = Number(params.id);
+  console.log(id);
+
+  
+  const navigate = useNavigate();
+  const [dynamicProduct, setDynamicProduct] = useState<Product[]>([]);
+  const [relatedProduct, setRelatedProduct] = useState<Product[]>([]);
+
+  // Fetch products from Sanity
+  async function fetchProducts() {
+    const query = `
+      *[_type == "product"] {
+        title,
+        image {
+          asset -> {
+            _id,
+            url
+          }
+        },
+        id,
+        category,
+        price,
+        description,
+        rating{
+          rate,
+          count
+        },
+      }
+    `;
+
+    // Fetch all products from Sanity
+    const products = await client.fetch(query);
+
+    // Find the dynamic product based on the id
+    const dynamicProduct = products.filter((product: Product) => product.id === id);
+    setDynamicProduct(dynamicProduct);
+
+    // Find related products based on category of the dynamic product
+    if (dynamicProduct.length > 0) {
+      const category = dynamicProduct[0].category;
+
+      // Find all products with the same category but excluding the current dynamic product
+      const related = products.filter((product: Product) => product.category === category && product.id !== id);
+      setRelatedProduct(related);
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, [id]); // Re-run the fetch whenever the `id` changes
+
+  return (
+    <>
+      {/* =================== Detail Page  =================== */}
+      <div className='detail-page'>
+        <h1>Detail Page</h1>
+        <div className="detail-products-container">
+        {dynamicProduct?.map((item) => {
+          return (
+            <div key={item.id} className="detail-product-card">
+               <div className="detail-image-container">
+                       <img
+                         src={urlFor(item.image).url()}
+                         alt={item.title}
+                         className="detail-product-image"
+                       />
+                     </div>
+                     <div className="detail-product-details">
+                       <h1 className="detail-product-title">{item.title.slice(0,20)}</h1>
+                       <h2 className="detail-product-category">{item.category.toUpperCase()}</h2>
+                       <p className="detail-product-price">${item.price}</p>
+                       <p>{item.description.slice(0,270)}</p>
+                       <div className="rating">
+                         <span>{renderStars(item.rating.rate)}</span>
+                         <span className="rating-count">({item.rating.count} reviews)</span>
+                       </div>
+                       <button className='detail-product-button product-button'>Add to cart</button>
+                     </div>
+            </div>
+          );
+        })}
+        </div>
+      </div>
+
+      {/* =================== Related Products  =================== */}
+      <div className='related-page'>
+        <h1>Related Products</h1>
+        <div className="products-container">
+        {relatedProduct?.length > 0 ? (
+          relatedProduct.map((item) => (
+      
+
+             <div key={item.id} className="product-card" onClick={() => navigate(`/${item.id}`)}>
+                     <div className="image-container">
+                       <img
+                         src={urlFor(item.image).url()}
+                         alt={item.title}
+                         className="product-image"
+                       />
+                     </div>
+                     <div className="product-details">
+                       <h1 className="product-title">{item.title.slice(0,20)}</h1>
+                       <h2 className="product-category">{item.category.toUpperCase()}</h2>
+                       <p className="product-price">${item.price}</p>
+                       <p>{item.description.slice(0,70)}</p>
+                       <div className="rating">
+                         <span>{renderStars(item.rating.rate)}</span>
+                         <span className="rating-count">({item.rating.count} reviews)</span>
+                       </div>
+                       <button className='product-button'>Add to cart</button>
+                     </div>
+                   </div>
+
+            
+          ))
+        ) : (
+          <p>No related products found.</p>
+        )}
+      
+      </div> </div>
+    </>
+  );
+};
+
+export default ProductDetail;

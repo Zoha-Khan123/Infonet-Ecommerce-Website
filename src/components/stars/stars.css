@@ -1,0 +1,16 @@
+/* stars.css */
+
+/* Style for filled stars (yellow/gold) */
+.star-filled {
+    color: #f39c12; /* Gold color for filled stars */
+    font-size: 1.5rem;
+    margin-right: 2px;
+  }
+  
+  /* Style for empty stars (light gray) */
+  .star-empty {
+    color: #ddd;
+    font-size: 1.5rem;
+    margin-right: 2px;
+  }
+  

@@ -1,0 +1,57 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+
+}
+.logo {
+    color:#414141;
+    font-size: larger;
+}
+
+ul li {
+  list-style: none;
+  font-size: large;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.nav-links li:hover {
+  transform: scale(1.1);
+}
+.nav-link {
+  text-decoration: none;
+  color:#333;
+}
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+@media (max-width: 750px) {
+ 
+  .nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hamburger-menu {
+    display: block;
+  }
+  .navbar {
+    flex-direction: column;
+  }
+ 
+  .nav-links {
+    flex-direction: column;
+  }
+}
+/* #414141 */
