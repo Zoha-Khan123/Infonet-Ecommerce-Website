@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin:40px 0px;
+margin-bottom:40px;
 }
 .products-heading{
   font-size: 40px;
@@ -26,6 +26,7 @@ body {
   gap: 40px;
   margin-top: 20px;
 }
+
 .product-card {
   background-color: white;
   display: flex;
@@ -111,5 +112,17 @@ body {
   }
   .products-container {
     max-width: 350px;
+  }
+  .product-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .product-category {
+    font-size: medium;
+  }
+}
+@media (max-width: 450px) {
+  body {
+    max-width: 300px;
   }
 }
