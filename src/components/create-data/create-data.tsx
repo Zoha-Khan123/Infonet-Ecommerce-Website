@@ -1,5 +1,5 @@
 import  {useEffect, useState} from 'react'
-import client from "../../../sanity-ecommerce/sanityClient"
+import client from "../../../sanityClient"
 
 interface DataItem {
   id: number
@@ -13,7 +13,8 @@ interface DataItem {
 
 export default function CreateData() {
   const [products, setProducts] = useState<DataItem[]>([])
-
+    console.log(products);
+    
   // data transfer to sanity studio function
   const createProducts = async () => {
     const res = await fetch('https://fakestoreapi.com/products')

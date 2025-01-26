@@ -1,8 +1,8 @@
 import  { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { Product } from '../fetch-data/fetch-data';
-import client from "../../../sanity-ecommerce/sanityClient"
-import {urlFor} from '../../../sanity-ecommerce/lib/image'
+import client from "../../../sanityClient"
+import {urlFor} from '../../../lib/image'
 import renderStars from '../stars/stars';
 import "./product-detail.css"
 

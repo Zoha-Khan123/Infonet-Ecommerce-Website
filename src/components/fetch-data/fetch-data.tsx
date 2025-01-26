@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import client from "../../../sanity-ecommerce/sanityClient"
-import {urlFor} from '../../../sanity-ecommerce/lib/image'
+import client from "../../../sanityClient"
+import {urlFor} from '../../../lib/image'
 
 import {useNavigate} from 'react-router'
 import renderStars from '../stars/stars'
