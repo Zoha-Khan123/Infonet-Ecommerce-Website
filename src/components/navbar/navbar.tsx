@@ -1,4 +1,4 @@
-import  { useState } from 'react'
+import  { useEffect, useState } from 'react'
 import '../navbar/navbar.css'
 import {Link} from 'react-router'
 import {GiHamburgerMenu} from 'react-icons/gi'
@@ -9,6 +9,27 @@ const Navbar = () => {
   const handleSetToggle = () => {
     setToggle(!toggle);
   }
+   // Set toggle based on window width
+   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 750) {
+        setToggle(true); // Set to true for larger screens
+      } else {
+        setToggle(false); // Set to false for smaller screens
+      }
+    };
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Set the initial state based on current window width
+    handleResize();
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <div className="navbar">
       <div className='nav-container'>
