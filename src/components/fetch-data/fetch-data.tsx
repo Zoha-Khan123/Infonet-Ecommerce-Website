@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import client from "../../../sanityClient";
 import { urlFor } from "../../../lib/image";
-
 import { useNavigate } from "react-router";
 import renderStars from "../stars/stars";
+import { ColorRing } from "react-loader-spinner";
 
 export interface Product {
   title: string;
@@ -25,6 +25,7 @@ export interface Product {
 export default function FetchData() {
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]); // State to store products
+  const [loading, setLoading] = useState(true); // State to manage loading
 
   // Fetch products from Sanity
   async function fetchProducts() {
@@ -50,6 +51,7 @@ export default function FetchData() {
 
     const products = await client.fetch(query);
     setProducts(products); // Set the fetched products to state
+    setLoading(false); // Set loading to false after data is fetched
   }
 
   // Fetch products when the component mounts
@@ -59,39 +61,55 @@ export default function FetchData() {
 
   return (
     <div className="flex">
-      <h1 className="products-heading">Products</h1>
-      <div className="products-container">
-        {products.map((item) => (
-          <div
-            key={item.id}
-            className="product-card"
-            onClick={() => navigate(`/${item.id}`)}
-          >
-            <div className="image-container">
-              <img
-                src={urlFor(item.image).url()}
-                alt={item.title}
-                className="product-image"
-              />
-            </div>
-            <div className="product-details">
-              <h1 className="product-title">{item.title.slice(0, 20)}</h1>
-              <h2 className="product-category">
-                {item.category.toUpperCase()}
-              </h2>
-              <p className="product-price">${item.price}</p>
-              <p>{item.description.slice(0, 70)}</p>
-              <div className="rating">
-                <span>{renderStars(item.rating.rate)}</span>
-                <span className="rating-count">
-                  ({item.rating.count} reviews)
-                </span>
+      {loading ? (
+       <div className="w-full h-screen flex justify-enter items-center">
+         <ColorRing
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="color-ring-loading"
+          wrapperStyle={{}}
+          wrapperClass="color-ring-wrapper"
+          colors={['#333','#333','#333','#333','#333']}
+          />
+       </div>
+      ) : (
+        <>
+          <h1 className="products-heading">Products</h1>
+          <div className="products-container">
+            {products.map((item) => (
+              <div
+                key={item.id}
+                className="product-card"
+                onClick={() => navigate(`/${item.id}`)}
+              >
+                <div className="image-container">
+                  <img
+                    src={urlFor(item.image).url()}
+                    alt={item.title}
+                    className="product-image"
+                  />
+                </div>
+                <div className="product-details">
+                  <h1 className="product-title">{item.title.slice(0, 20)}</h1>
+                  <h2 className="product-category">
+                    {item.category.toUpperCase()}
+                  </h2>
+                  <p className="product-price">${item.price}</p>
+                  <p>{item.description.slice(0, 70)}</p>
+                  <div className="rating">
+                    <span>{renderStars(item.rating.rate)}</span>
+                    <span className="rating-count">
+                      ({item.rating.count} reviews)
+                    </span>
+                  </div>
+                </div>
+                <button className="product-button">Add to cart</button>
               </div>
-            </div>
-            <button className="product-button">Add to cart</button>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 }
