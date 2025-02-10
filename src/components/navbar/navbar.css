@@ -54,3 +54,23 @@ ul li {
   }
 }
 /* #414141 */
+
+/* ========== Design Logout ============= */
+.user-info{
+  display: flex;
+  gap: 16px;
+}
+.user-pic{
+display: flex;
+gap:8;
+}
+.user-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:20px;
+  background-color: #333;
+  color:white;
+  border-radius: 50%;
+
+}

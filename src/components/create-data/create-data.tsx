@@ -13,19 +13,23 @@ interface DataItem {
 
 export default function CreateData() {
   const [products, setProducts] = useState<DataItem[]>([])
-    console.log(products);
+    // console.log(products);
+
+      // Function to add a delay
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     
   // data transfer to sanity studio function
   const createProducts = async () => {
     const res = await fetch('https://fakestoreapi.com/products')
     const data: DataItem[] = await res.json()
-    console.log(data)
+    // console.log(data)
 
     // Wrap the map inside Promise.all to handle all async calls concurrently
     await Promise.all(
-      data.map(async (item) => {
+      data.map(async (item,index) => {
         // For image
-        console.log(item)
+        // console.log(item)
+        await delay(index * 1000); // 1 second delay between each request
 
         const res = await fetch(item.image)
         const blob = await res.blob()
@@ -48,7 +52,7 @@ export default function CreateData() {
       }),
     )
 
-    console.log('Products created successfully')
+    // console.log('Products created successfully')
   }
 
   const deleteData = async () => {
