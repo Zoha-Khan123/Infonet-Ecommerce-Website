@@ -13,7 +13,7 @@ interface DataItem {
 
 export default function CreateData() {
   const [products, setProducts] = useState<DataItem[]>([])
-    // console.log(products);
+    console.log(products);
 
       // Function to add a delay
   const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

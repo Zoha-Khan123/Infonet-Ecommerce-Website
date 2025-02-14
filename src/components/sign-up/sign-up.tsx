@@ -29,6 +29,8 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     signUp({ ...data, imageURL: imageUrl });
+    console.log(errors);
+    
   };
 
   //  ============== Process image upload ================
