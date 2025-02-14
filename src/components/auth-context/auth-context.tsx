@@ -30,6 +30,7 @@ type signUpDataType = {
   email: string;
   password: string;
   confirmPassword: string;
+  imageURL: string;
 };
 
 type signInDataType = {
@@ -40,6 +41,7 @@ type signInDataType = {
 type CheckStateDataType = {
   name: string;
   email: string;
+  image:string;
 };
 
 
@@ -114,11 +116,13 @@ const AuthContext: React.FC<AuthContextProps> = ({ children }) => {
           JSON.stringify({
             name: `${availableUser.firstName} ${availableUser.lastName}`,
             email: availableUser.email,
+            image : availableUser.imageURL,
           })
         );
         setLoginData({
           name: `${availableUser.firstName} ${availableUser.lastName}`,
           email: availableUser.email,
+          image : availableUser.imageURL,
         })
         alert("Login Successful")
         navigate("/");

@@ -1,76 +1,162 @@
+/* Container for the navbar */
+.navbar-container {
+  max-width: 1200px;
+  position: relative;
+  margin: 0 auto; /* Center the container */
+}
+
+/* Navbar styles */
 .navbar {
+  background-color: #fff; /* Light grey background */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 20px; /* Add horizontal padding for spacing */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  z-index: 1000;
 }
 
+.logo {
+  color: #333; /* Dark grey for logo */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ------------ Navbar Links -------------------------- */
 .nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  transition: right 0.3s ease-in-out
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-link {
+  color: #333; /* Dark grey for links */
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.nav-link:hover {
+  color: #555; /* Slightly darker grey on hover */
+}
+
+/* ------------ User Info -------------------------- */
+.user-info {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-
-}
-.logo {
-    color:#414141;
-    font-size: larger;
+  gap: 20px;
 }
 
-ul li {
-  list-style: none;
-  font-size: large;
-  font-weight: 500;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+.user-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-.nav-links li:hover {
-  transform: scale(1.1);
+
+.user-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ccc; /* Light grey border */
+  background-color: #e0e0e0; /* Grey background for placeholder */
 }
-.nav-link {
-  text-decoration: none;
-  color:#333;
+
+.user-name {
+  font-size: 1rem;
+  color: #333; /* Dark grey for user name */
+  font-weight: bold;
 }
+
+.user-first-logo {
+  background-color: #333; /* Dark grey for logo background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* ------------ Hamburger Menu -------------------------- */
 .hamburger-menu {
   display: none;
   cursor: pointer;
 }
-@media (max-width: 750px) {
- 
-  .nav-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+
+.logout-btn {
+  background: #333; /* Dark grey button */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.logout-btn:hover {
+  background: #555; /* Slightly lighter grey on hover */
+}
+
+/* ------------ Mobile Screen Styles -------------------------- */
+@media (max-width: 1200px) {
+  /* Adjust nav-links for mobile screen */
+  .nav-links {
+    background-color: #fff; /* Same light grey as navbar */
+    width: 60%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100%; /* Initially hidden */
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 30px;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1); 
+    transition: right 0.3s ease-in-out;
+    
   }
+
+  /* Show hamburger menu on mobile */
   .hamburger-menu {
     display: block;
+    z-index: 1001;
   }
-  .navbar {
-    flex-direction: column;
-  }
- 
-  .nav-links {
-    flex-direction: column;
-  }
-}
-/* #414141 */
 
-/* ========== Design Logout ============= */
-.user-info{
-  display: flex;
-  gap: 16px;
-}
-.user-pic{
-display: flex;
-gap:8;
-}
-.user-logo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding:20px;
-  background-color: #333;
-  color:white;
-  border-radius: 50%;
+  .open-icon,
+  .close-icon {
+    z-index: 10;
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333; /* Dark grey icons */
+  }
 
+  /* Display the nav-links when toggle is active */
+  .nav-links.active {
+    right: 0; /* Show menu */
+  }
 }
