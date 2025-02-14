@@ -2,28 +2,28 @@
 .navbar-container {
   max-width: 1200px;
   position: relative;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto; 
 }
 
 /* Navbar styles */
 .navbar {
-  background-color: #fff; /* Light grey background */
+  background-color: #fff; 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 20px; /* Add horizontal padding for spacing */
+  padding: 0px 20px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   max-width: 1200px;
   margin: 0 auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
 .logo {
-  color: #333; /* Dark grey for logo */
+  color: #333; 
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
@@ -43,15 +43,15 @@
 }
 
 .nav-link {
-  color: #333; /* Dark grey for links */
+  color: #333; 
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  transition: color 0.3s ease-in-out; /* Smooth hover effect */
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  color: #555; /* Slightly darker grey on hover */
+  color: #555; 
 }
 
 /* ------------ User Info -------------------------- */
@@ -76,18 +76,18 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid #ccc; /* Light grey border */
-  background-color: #e0e0e0; /* Grey background for placeholder */
+  border: 2px solid #ccc; 
+  background-color: #e0e0e0; 
 }
 
 .user-name {
   font-size: 1rem;
-  color: #333; /* Dark grey for user name */
+  color: #333;
   font-weight: bold;
 }
 
 .user-first-logo {
-  background-color: #333; /* Dark grey for logo background */
+  background-color: #333; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +106,7 @@
 }
 
 .logout-btn {
-  background: #333; /* Dark grey button */
+  background: #333;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
@@ -114,23 +114,22 @@
   border: none;
   outline: none;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease-in-out; /* Smooth hover effect */
+  transition: background-color 0.3s ease-in-out; 
 }
 
 .logout-btn:hover {
-  background: #555; /* Slightly lighter grey on hover */
+  background: #555; 
 }
 
 /* ------------ Mobile Screen Styles -------------------------- */
 @media (max-width: 1200px) {
-  /* Adjust nav-links for mobile screen */
   .nav-links {
-    background-color: #fff; /* Same light grey as navbar */
+    background-color: #fff; 
     width: 60%;
     height: 100vh;
     position: fixed;
     top: 0;
-    right: -100%; /* Initially hidden */
+    right: -100%; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -152,11 +151,23 @@
     display: block;
     cursor: pointer;
     font-size: 20px;
-    color: #333; /* Dark grey icons */
+    color: #333; 
   }
 
-  /* Display the nav-links when toggle is active */
   .nav-links.active {
     right: 0; /* Show menu */
+  }
+
+
+}
+
+@media (max-width: 400px) {
+  .user-image{
+    width: 20px;
+  height: 20px;
+  background-color: aqua;
+  }
+  .logo{
+    font-size: 1rem;
   }
 }
