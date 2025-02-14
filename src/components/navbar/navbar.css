@@ -126,6 +126,7 @@
   .nav-links {
     background-color: #fff; 
     width: 60%;
+    margin: 0;
     height: 100vh;
     position: fixed;
     top: 0;
