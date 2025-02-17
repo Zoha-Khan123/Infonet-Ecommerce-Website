@@ -113,6 +113,7 @@ const SignUp = () => {
               })}
               accept="image/*"
             />
+            <img src={imageUrl} alt="" className="image-select" />
           </div>
 
           {/* Selector */}

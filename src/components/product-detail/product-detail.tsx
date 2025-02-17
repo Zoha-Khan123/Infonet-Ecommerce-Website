@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Product } from "../fetch-data/fetch-data";
 import client from "../../../sanityClient";
@@ -6,8 +6,15 @@ import { urlFor } from "../../../lib/image";
 import renderStars from "../stars/stars";
 import "./product-detail.css";
 import { ColorRing } from "react-loader-spinner";
+import { CartContextValue } from "../cart-context/cart-context";
 
 const ProductDetail = () => {
+
+ // ================= Context Api ===================
+ const cartContextValue = useContext(CartContextValue);
+  const {addToCart} = cartContextValue
+
+  
   const params = useParams();
   const id = Number(params.id);
   console.log(id);
@@ -29,6 +36,8 @@ const ProductDetail = () => {
           }
         },
         id,
+        quantity,
+        price,
         category,
         price,
         description,
@@ -111,6 +120,7 @@ const ProductDetail = () => {
                         {item.category.toUpperCase()}
                       </h2>
                       <p className="detail-product-price">${item.price}</p>
+                      <p className="product-quantity">Quantity:{item.quantity}</p>
                       <p>{item.description.slice(0, 270)}</p>
                       <div className="rating">
                         <span>{renderStars(item.rating.rate)}</span>
@@ -118,9 +128,11 @@ const ProductDetail = () => {
                           ({item.rating.count} reviews)
                         </span>
                       </div>
+                      <div className="add-to-cart" onClick={()=>addToCart(item)}>
                       <button className="detail-product-button product-button">
                         Add to cart
                       </button>
+                    </div>
                     </div>
                   </div>
                 );
@@ -152,6 +164,7 @@ const ProductDetail = () => {
                         {item.category.toUpperCase()}
                       </h2>
                       <p className="product-price">${item.price}</p>
+                      <p className="product-quantity">Quantity:{item.quantity}</p>
                       <p>{item.description.slice(0, 70)}</p>
                       <div className="rating">
                         <span>{renderStars(item.rating.rate)}</span>
@@ -159,7 +172,9 @@ const ProductDetail = () => {
                           ({item.rating.count} reviews)
                         </span>
                       </div>
+                      <div className="add-to-cart" onClick={()=>addToCart(item)}>
                       <button className="product-button">Add to cart</button>
+                    </div>
                     </div>
                   </div>
                 ))

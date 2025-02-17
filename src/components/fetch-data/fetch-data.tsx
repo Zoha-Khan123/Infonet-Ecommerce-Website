@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import client from "../../../sanityClient";
 import { urlFor } from "../../../lib/image";
 import { useNavigate } from "react-router";
 import renderStars from "../stars/stars";
 import { ColorRing } from "react-loader-spinner";
+import { CartContextValue } from "../cart-context/cart-context";
+import { IconNode } from "lucide";
 
 export interface Product {
   title: string;
@@ -13,16 +15,24 @@ export interface Product {
     };
   };
   id: number;
+  quantity:number,
   category: string;
   description: string;
   price: number;
   rating: {
     rate: number;
     count: number;
-  };
+  },
+  Trash?:IconNode;
 }
 
 export default function FetchData() {
+    // ================= Context Api ===================
+    const cartContextValue = useContext(CartContextValue);
+    const {addToCart} = cartContextValue
+  
+
+    // ================ Navigation =================
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]); // State to store products
   const [loading, setLoading] = useState(true); // State to manage loading
@@ -39,6 +49,7 @@ export default function FetchData() {
           }
         },
         id,
+        quantity,
         category,
         price,
         description,
@@ -81,7 +92,7 @@ export default function FetchData() {
               <div
                 key={item.id}
                 className="product-card"
-                onClick={() => navigate(`/${item.id}`)}
+                // onClick={() => navigate(`/${item.id}`)}
               >
                 <div className="image-container">
                   <img
@@ -104,7 +115,9 @@ export default function FetchData() {
                     </span>
                   </div>
                 </div>
+                <div className="add-to-cart" onClick={()=>addToCart({...item,quantity:1})}>
                 <button className="product-button">Add to cart</button>
+                </div>
               </div>
             ))}
           </div>

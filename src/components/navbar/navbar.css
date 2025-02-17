@@ -121,6 +121,9 @@
 .logout-btn:hover {
   background: #555; 
 }
+.shopping-cart-icon{
+  font-size:20px;
+}
 
 /* ------------ Mobile Screen Styles -------------------------- */
 @media (max-width: 1200px) {

@@ -2,13 +2,14 @@ import  {useEffect, useState} from 'react'
 import client from "../../../sanityClient"
 
 interface DataItem {
-  id: number
-  title: string
-  image: string
-  category: string
-  description: string
-  _type: string
-  _id: string
+  id: number;
+  title: string;
+  image: string;
+  category: string;
+  quantity:number;
+  description: string;
+  _type: string;
+  _id: string;
 }
 
 export default function CreateData() {

@@ -1,0 +1,13 @@
+.items-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+}
+.item-title{
+font-size: small;
+}
+.item-image{
+    width:60px;
+    height:60px;
+}

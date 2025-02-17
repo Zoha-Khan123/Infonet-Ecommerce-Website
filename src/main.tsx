@@ -10,6 +10,7 @@ import ProductDetail from "./components/product-detail/product-detail.tsx";
 import NotFound from "./components/not-found/not-found.tsx";
 import SignUp from "./components/sign-up/sign-up.tsx";
 import SignIn from "./components/sign-up/sign-in.tsx";
+import Cart from "./components/cart/cart.tsx";
 
 const route = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const route = createBrowserRouter([
       {
         path: ":id",
         element: <ProductDetail />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
 
       {
