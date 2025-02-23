@@ -4,9 +4,9 @@ import { Link } from "react-router";
 import { IoMdClose } from "react-icons/io";
 import { FaBars } from "react-icons/fa";
 import { AuthContextValue } from "../auth-context/auth-context";
-import { CiShoppingCart } from "react-icons/ci";
-import { Badge } from 'antd';
 import { CartContextValue } from "../cart-context/cart-context";
+import { Badge } from "antd";
+import { CiShoppingCart } from "react-icons/ci";
 
 const Navbar = () => {
 
@@ -87,6 +87,8 @@ const Navbar = () => {
                 <p>{loginData.name}</p>
               </div>
 
+            </div>
+          )}
               {/* cart */}
               <div className="cart">
                 <Link to="/cart">
@@ -95,8 +97,6 @@ const Navbar = () => {
                 </Badge>
                 </Link>
               </div>
-            </div>
-          )}
 
           {/* Hamburger Menu Button */}
           <div className="hamburger-menu">

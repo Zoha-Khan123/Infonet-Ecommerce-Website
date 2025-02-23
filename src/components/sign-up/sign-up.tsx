@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "./sign-up.css";
 import { useContext, useState } from "react";
 import { AuthContextValue } from "../auth-context/auth-context";
-// ============= React Hook Form ==============
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -17,23 +16,19 @@ type Inputs = {
 
 const SignUp = () => {
   const [imageUrl, setImageUrl] = useState<string>("");
-  //============ Context Api ================
   const { signUp } = useContext(AuthContextValue);
 
-  // ================= React Hook Form ===============
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     signUp({ ...data, imageURL: imageUrl });
-    console.log(errors);
-    
   };
 
-  //  ============== Process image upload ================
   const processImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const img = e.target.files ? e.target.files[0] : null;
 
@@ -54,55 +49,57 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h1>SignUp</h1>
           <div className="signup-name">
-            {/* First Name */}
             <div>
               <label htmlFor="firstName">First Name</label>
               <input
                 {...register("firstName", { required: true })}
                 placeholder="First Name"
               />
+              {errors.firstName && <span>This field is required</span>}
             </div>
 
-            {/* Last Name */}
             <div>
               <label htmlFor="lastName">Last Name</label>
               <input
                 {...register("lastName", { required: true })}
                 placeholder="Last Name"
               />
+              {errors.lastName && <span>This field is required</span>}
             </div>
           </div>
 
-          {/* Email */}
           <div>
             <label htmlFor="email">Email</label>
             <input
               {...register("email", { required: true })}
               placeholder="Email"
+              autoComplete="email"
             />
+            {errors.email && <span>This field is required</span>}
           </div>
 
-          {/* Password */}
           <div>
             <label htmlFor="password">Password</label>
             <input
               type="password"
               {...register("password", { required: true })}
               placeholder="Password"
+              autoComplete="new-password"
             />
+            {errors.password && <span>This field is required</span>}
           </div>
 
-          {/* Confirm Password */}
           <div>
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
-              type="confirmPassword"
+              type="password"
               {...register("confirmPassword", { required: true })}
               placeholder="Confirm Password"
+              autoComplete="new-password"
             />
+            {errors.confirmPassword && <span>This field is required</span>}
           </div>
 
-          {/* Image Container */}
           <div className="signup-image-container">
             <label>Select your image</label>
             <input
@@ -113,23 +110,23 @@ const SignUp = () => {
               })}
               accept="image/*"
             />
+            {errors.image && <span>This field is required</span>}
             <img src={imageUrl} alt="" className="image-select" />
           </div>
 
-          {/* Selector */}
-          <select {...register("Gender")}>
-            <option disabled selected>
+          <select {...register("Gender")} defaultValue="">
+            <option value="" disabled>
               Select a gender
             </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
 
-          {/* Button */}
-          <input type="submit" className="signup-button" />
+          <button type="submit" className="signup-button">
+            SignUp
+          </button>
         </form>
 
-        {/* Paragraph */}
         <p className="signup-para">
           Already have an account{" "}
           <Link to="/sign-in" className="link-tag">
@@ -142,9 +139,6 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-
-
 
 
 
