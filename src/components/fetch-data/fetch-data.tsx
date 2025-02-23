@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import client from "../../../sanityClient";
 import { urlFor } from "../../../lib/image";
-import { useNavigate } from "react-router";
 import renderStars from "../stars/stars";
 import { ColorRing } from "react-loader-spinner";
 import { CartContextValue } from "../cart-context/cart-context";
@@ -32,8 +31,7 @@ export default function FetchData() {
     const {addToCart} = cartContextValue
   
 
-    // ================ Navigation =================
-  const navigate = useNavigate();
+   // ================ Navigation =================
   const [products, setProducts] = useState<Product[]>([]); // State to store products
   const [loading, setLoading] = useState(true); // State to manage loading
 
